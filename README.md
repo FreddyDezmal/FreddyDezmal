@@ -1,0 +1,4 @@
+- 👋 Hi, I am Freddy
+- 👀 I’m interested in Cyber Security
+- 🌱 I’m currently learning Python and JavaScript
+- 💞️ I’m looking to collaborate on anything at all regardless on nature, if it's code I'd love to learn
