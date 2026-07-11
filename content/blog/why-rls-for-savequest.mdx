@@ -1,0 +1,37 @@
+---
+title: "Why I Chose Row-Level Security for SaveQuest"
+description: "SaveQuest moves real money, which means authorization can't be optional application logic — it has to be a database guarantee."
+publishedAt: "2026-07-11"
+tags: ["PostgreSQL", "Security", "SaveQuest"]
+---
+
+SaveQuest is a savings app — users set goals, make deposits, and earn XP, streaks, and achievements along the way. The moment an app touches real money, the usual SaaS tolerance for "the application layer will handle it" stops being good enough. A bug in one route handler shouldn't be the only thing standing between one user's balance and another's.
+
+That's the reasoning behind the biggest architectural decision in SaveQuest: **every table enforces `auth.uid() = user_id` at the PostgreSQL level**, via Row-Level Security, not just in application code.
+
+## The problem with application-level authorization
+
+Application-level checks work — right up until one route forgets to add them. Every new endpoint is a new place the `WHERE user_id = ?` clause could be missing, and every refactor is a chance to drop it by accident. That failure mode is invisible until it isn't: the code compiles, the tests that exist still pass, and the leak only shows up when someone notices data that shouldn't be there.
+
+Row-Level Security removes that entire failure mode by moving the check into the database itself. A policy like this is attached directly to the table:
+
+```sql
+create policy "users can only access their own deposits"
+on deposits
+for select
+using (auth.uid() = user_id);
+```
+
+Once that policy exists, it applies to *every* query against `deposits` — from any route, any future feature, any developer who joins the project later and doesn't know the codebase's conventions yet. There's no "forgot to add the filter" failure mode, because the filter isn't optional application code anymore.
+
+## The one exception: SECURITY DEFINER
+
+Strict RLS creates one real problem: some operations are legitimately privileged. Deducting XP or purchasing a "shield" (a streak-protection mechanic) needs to modify data the requesting user doesn't directly own in the usual sense — the operation is *about* their account, but it's a system-initiated write, not a user-initiated one.
+
+Rather than loosening the RLS policy to accommodate this — which would widen the blast radius of every other query too — SaveQuest uses `SECURITY DEFINER` functions for exactly these privileged operations. Each one runs with elevated privileges *and* an explicit ownership guard inside the function body, so the bypass is scoped to precisely the operations that need it. The general RLS policy on the table stays exactly as strict as it was.
+
+## The trade-off
+
+This isn't free. RLS policies add a small amount of query planning overhead, and `SECURITY DEFINER` functions require care — get the internal ownership check wrong, and you've built a hole with elevated privileges attached to it. The trade being made is deliberate: accept that small overhead and that added care, in exchange for a category of bug — cross-user data leaks — that simply can't happen through a missing `WHERE` clause anymore.
+
+For an app where "user_id" next to a dollar amount is the whole product, that trade was an easy one to make.

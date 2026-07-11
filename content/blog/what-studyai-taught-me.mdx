@@ -1,0 +1,36 @@
+---
+title: "What StudyAI Taught Me About AI Architecture"
+description: "Building a multi-tenant AI SaaS surfaced four lessons that had nothing to do with prompting and everything to do with infrastructure."
+publishedAt: "2026-07-11"
+tags: ["AI", "Architecture", "StudyAI", "PostgreSQL"]
+---
+
+StudyAI is a multi-tenant SaaS for learning workflows — collaborative notes, semantic search, and AI-generated flashcards and quizzes. None of the hard problems turned out to be about prompting the model well. They were about the infrastructure around it.
+
+## Tenant isolation is a data-model decision, not a feature
+
+In a single-tenant app, "whose data is this?" has one answer. In a multi-tenant SaaS, it's the question every single query has to answer correctly, forever, including the queries written by whoever joins the codebase two years from now. StudyAI enforces tenant boundaries with Postgres Row-Level Security using app-level context variables, so isolation is guaranteed by the database itself — not by every future developer remembering to scope every future query correctly. Once that's true, tenant isolation stops being something you have to keep thinking about.
+
+## Boring infrastructure beats exciting infrastructure
+
+Semantic search is the part of an AI product that looks like it needs a specialized vector database — and often it doesn't, at least not yet. StudyAI keeps embeddings in the same PostgreSQL instance as everything else, using `pgvector` with HNSW indexing, sized to handle 10M+ vectors before a dedicated vector store would even be worth the operational cost of running a second database. The "exciting" architecture — a separate vector DB from day one — would have added a system to operate, monitor, and keep in sync, in exchange for headroom the product hadn't needed yet.
+
+## AI cost is an engineering problem, not just a billing problem
+
+It's tempting to treat AI spend as a line item to review monthly rather than something architecture can actually control. Two decisions in StudyAI treat it as an engineering problem instead: prompt caching, which cuts AI costs by roughly 70%, and model routing, which sends structured, low-complexity tasks — like flashcard generation — to a cheaper model instead of the most capable one by default.
+
+```text
+if (task.isStructuredAndLowComplexity) {
+  route(task, "haiku");   // ~12x cheaper, ~$0.80 saved per 1k flashcard generations
+} else {
+  route(task, "sonnet");  // reserved for tasks that actually need the reasoning
+}
+```
+
+The model you reach for by default isn't the model every task actually needs. Routing by task complexity turned out to be a bigger cost lever than any prompt-engineering trick.
+
+## Scale when the numbers say to, not before
+
+StudyAI's scaling plan is staged rather than front-loaded: the current single-instance setup covers 0–1,000 users, read replicas and a Redis cluster are the plan for 1,000–10,000, and EKS with KEDA-based autoscaling only enters the picture from 10,000–100,000. Each stage only gets built when the previous one's headroom actually runs out — which meant most of the "scale-ready" infrastructure people default to adding early simply wasn't built yet, on purpose.
+
+None of these four lessons are really about AI. They're about not letting "this involves AI" be an excuse to skip the same architectural discipline — isolation, infrastructure choice, cost control, staged scaling — that any other production system needs.

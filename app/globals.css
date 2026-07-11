@@ -1,0 +1,137 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ===================================================================
+   DESIGN TOKENS — single source of truth.
+   Components must never hardcode a color/space/radius value; they
+   consume these through Tailwind (see tailwind.config.ts mapping).
+   =================================================================== */
+
+:root {
+  /* --- Color: neutral scale (light) --- */
+  --color-bg: 255 255 255;
+  --color-bg-subtle: 250 250 250;
+  --color-surface: 255 255 255;
+  --color-border: 228 228 231;
+  --color-text-primary: 24 24 27;
+  --color-text-secondary: 82 82 91;
+  --color-text-tertiary: 161 161 170;
+
+  /* --- Color: single accent, used sparingly --- */
+  --color-accent: 37 99 235;       /* actions, links, focus */
+  --color-accent-foreground: 255 255 255;
+
+  /* --- Semantic --- */
+  --color-success: 22 163 74;
+  --color-danger: 220 38 38;
+
+  /* --- Typography scale (fluid, clamp-based) --- */
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.25rem;
+  --font-size-2xl: 1.5rem;
+  --font-size-3xl: clamp(1.875rem, 1.6rem + 1.2vw, 2.5rem);
+  --font-size-4xl: clamp(2.25rem, 1.8rem + 2vw, 3.5rem);
+  --font-size-5xl: clamp(2.75rem, 2rem + 3.5vw, 5rem);
+
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+
+  --leading-tight: 1.1;
+  --leading-snug: 1.35;
+  --leading-normal: 1.6;
+
+  /* --- Spacing scale (4px base) --- */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-24: 6rem;
+  --space-32: 8rem;
+
+  /* --- Radius --- */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-full: 9999px;
+
+  /* --- Elevation (kept extremely subtle by constitution) --- */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.04);
+  --shadow-md: 0 2px 8px -2px rgb(0 0 0 / 0.06);
+
+  /* --- Layout --- */
+  --container-max: 72rem;
+  --container-padding: 1.25rem;
+
+  /* --- Motion --- */
+  --duration-fast: 120ms;
+  --duration-base: 200ms;
+  --duration-slow: 320ms;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.dark {
+  --color-bg: 9 9 11;
+  --color-bg-subtle: 17 17 20;
+  --color-surface: 17 17 20;
+  --color-border: 39 39 42;
+  --color-text-primary: 250 250 250;
+  --color-text-secondary: 161 161 170;
+  --color-text-tertiary: 113 113 122;
+
+  --color-accent: 96 165 250;
+  --color-accent-foreground: 9 9 11;
+
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.4);
+  --shadow-md: 0 2px 8px -2px rgb(0 0 0 / 0.5);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-bg text-text-primary antialiased;
+  }
+  :focus-visible {
+    outline: 2px solid rgb(var(--color-accent));
+    outline-offset: 2px;
+  }
+}
+
+/* rehype-pretty-code: dual light/dark syntax themes, toggled by the same
+   .dark class the rest of the site uses — no separate theme system. */
+code[data-theme] span {
+  color: var(--shiki-light);
+}
+.dark code[data-theme] span {
+  color: var(--shiki-dark);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(2px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
