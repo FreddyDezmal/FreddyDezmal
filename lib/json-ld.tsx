@@ -55,7 +55,6 @@ export async function JsonLdScript({ data }: { data: Record<string, unknown> }) 
       nonce={nonce}
       suppressHydrationWarning
       type="application/ld+json"
-      // eslint-disable-next-line react/no-danger
       dangerouslySetInnerHTML={{ __html: json }}
     />
   );

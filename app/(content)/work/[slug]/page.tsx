@@ -6,15 +6,15 @@ import { buildMetadata } from "@/lib/seo";
 import { JsonLdScript, projectJsonLd } from "@/lib/json-ld";
 
 interface CaseStudyPageProps {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }
 
 /**
  * Only slugs with an actual case study are statically generated. A
- * project that exists in content/projects but doesn't have a case study
- * yet (StudyAI, REP, Advanced Events, at time of writing) correctly 404s
- * here rather than rendering an empty or fabricated page — the Case
- * Study buttons for those will point here once their write-ups exist.
+ * project in content/projects without a written case study (currently
+ * Pocket Circle and BugTracker) correctly 404s here rather than
+ * rendering an empty or fabricated page — their Case Study buttons
+ * won't even render (see ProjectShowcase) until that changes.
  */
 export function generateStaticParams() {
   return caseStudies.map((cs) => ({ slug: cs.project.slug }));
@@ -22,8 +22,9 @@ export function generateStaticParams() {
 
 export const dynamicParams = false;
 
-export function generateMetadata({ params }: CaseStudyPageProps): Metadata {
-  const caseStudy = getCaseStudyBySlug(params.slug);
+export async function generateMetadata({ params }: CaseStudyPageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const caseStudy = getCaseStudyBySlug(slug);
   if (!caseStudy) return {};
 
   return buildMetadata({
@@ -33,8 +34,9 @@ export function generateMetadata({ params }: CaseStudyPageProps): Metadata {
   });
 }
 
-export default function CaseStudyPage({ params }: CaseStudyPageProps) {
-  const caseStudy = getCaseStudyBySlug(params.slug);
+export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
+  const { slug } = await params;
+  const caseStudy = getCaseStudyBySlug(slug);
   if (!caseStudy) notFound();
 
   return (

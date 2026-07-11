@@ -17,7 +17,7 @@ import { buildMetadata } from "@/lib/seo";
 import { JsonLdScript, articleJsonLd } from "@/lib/json-ld";
 
 interface BlogPostPageProps {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }
 
 const BLOG_DIR = path.join(process.cwd(), "content", "blog");
@@ -35,8 +35,9 @@ export function generateStaticParams() {
 // filesystem access) ever runs.
 export const dynamicParams = false;
 
-export function generateMetadata({ params }: BlogPostPageProps): Metadata {
-  const post = getPostBySlug(params.slug);
+export async function generateMetadata({ params }: BlogPostPageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const post = getPostBySlug(slug);
   if (!post) return {};
 
   return buildMetadata({
@@ -49,8 +50,9 @@ export function generateMetadata({ params }: BlogPostPageProps): Metadata {
   });
 }
 
-export default function BlogPostPage({ params }: BlogPostPageProps) {
-  const post = getPostBySlug(params.slug);
+export default async function BlogPostPage({ params }: BlogPostPageProps) {
+  const { slug } = await params;
+  const post = getPostBySlug(slug);
   if (!post) notFound();
 
   const { frontmatter, content } = post;

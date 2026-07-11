@@ -9,7 +9,7 @@ export interface TocEntry {
 export function extractHeadings(mdxSource: string): TocEntry[] {
   const matches = mdxSource.matchAll(/^##\s+(.+)$/gm);
   return Array.from(matches, (match) => {
-    const text = match[1].trim();
+    const text = (match[1] ?? "").trim();
     return { text, id: slugify(text) };
   });
 }

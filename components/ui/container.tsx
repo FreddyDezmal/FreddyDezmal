@@ -1,9 +1,10 @@
+import type { ElementType, ReactNode } from "react";
 import { clsx } from "clsx";
 
 interface ContainerProps {
-  children: React.ReactNode;
+  children: ReactNode;
   className?: string;
-  as?: keyof JSX.IntrinsicElements;
+  as?: ElementType;
 }
 
 /**
