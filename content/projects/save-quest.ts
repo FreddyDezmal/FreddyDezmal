@@ -23,11 +23,11 @@ export const saveQuest: Project = {
     "Row Level Security with SECURITY DEFINER privilege separation: every table enforces auth.uid() = user_id at the PostgreSQL level. Privileged operations (XP deduction, shield purchase) use SECURITY DEFINER functions with explicit ownership guards, bypassing RLS safely while keeping the hardened update policy intact for direct client access.",
   ],
   metrics: [
-    { label: "Engineering Sprints", value: "13" },
-    { label: "SQL Migrations", value: "37" },
+    { label: "Engineering Sprints", value: "20+" },
+    { label: "SQL Migrations", value: "40+" },
     { label: "Dashboard Latency", value: "-87% (14 → 2 queries)" },
-    { label: "Signup → Goal", value: "41.7%" },
-    { label: "Goal → First Deposit", value: "20%" },
+    { label: "Signup → Goal", value: "50%" },
+    { label: "Goal → First Deposit", value: "14.3%" },
     { label: "Analytics Footprint", value: "~2,340 events/mo (0.2% of free tier)" },
   ],
   quote: {
