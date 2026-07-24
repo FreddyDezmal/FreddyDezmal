@@ -17,6 +17,12 @@ export interface Project {
   logo?: string;
   technologies: string[];
   achievements: string[];
+  /**
+   * Short, punchy, checkmark-style highlights shown on project cards
+   * (home + work). Max ~3, each one line — the detailed explanation
+   * behind each one belongs in the case study, not here.
+   */
+  highlights?: string[];
   metrics: ProjectMetric[];
   quote?: {
     text: string;

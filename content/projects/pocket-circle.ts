@@ -20,6 +20,11 @@ export const pocketCircle: Project = {
     "Flexible contribution scheduling: weekly, biweekly, and monthly contribution cycles via state machines (PENDING → PAID/MISSED/LATE) and payout slot management.",
     "Invite-based group isolation: unique invite codes (CUID) with Prisma relations and cascade deletes keep groups isolated while still supporting multi-group membership.",
   ],
+  highlights: [
+    "Multi-channel notifications with retry tracking",
+    "State-machine-driven contribution scheduling",
+    "Invite-based group isolation with cascade deletes",
+  ],
   // No public metrics have been published for this project yet — listing
   // structural facts rather than inventing numbers.
   metrics: [

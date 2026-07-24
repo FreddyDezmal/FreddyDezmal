@@ -12,6 +12,11 @@ export const rep: Project = {
     "Soft-delete pattern with triggers: exercises and workouts use database triggers to cascade soft-deletes, preventing orphaned references while preserving audit history.",
     "Real-time session timer: elapsed-time tracking with interval-based updates and set-level completion states, plus progress-bar visual feedback during active workouts.",
   ],
+  highlights: [
+    "Row-Level Security enforces user-scoped access",
+    "Soft-delete cascades via database triggers",
+    "Real-time session timer with live progress",
+  ],
   metrics: [
     { label: "Dependencies", value: "Zero external JS (Supabase SDK only)" },
     { label: "Validation", value: "Frontend + DB (RLS + CHECK constraints)" },

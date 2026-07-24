@@ -25,6 +25,15 @@ export function getFeaturedProjects(): Project[] {
   return projects.filter((project) => project.featured);
 }
 
+/**
+ * The homepage is a trailer, not the movie — only the top 3 featured
+ * projects, not every featured project. The full set still lives on
+ * /work via `projects`.
+ */
+export function getHomepageProjects(): Project[] {
+  return getFeaturedProjects().slice(0, 3);
+}
+
 export function getProjectBySlug(slug: string): Project | undefined {
   return projects.find((project) => project.slug === slug);
 }

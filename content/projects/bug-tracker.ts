@@ -12,6 +12,11 @@ export const bugTracker: Project = {
     "Real-time filtering and computed status: issue status (open → overdue → resolved) is computed dynamically from dates and resolution state; full-text search scans summary, description, and ID.",
     "Multi-view architecture: modular separation of concerns with a dedicated Storage.js data layer, Utils.js UI helpers, and page-specific logic, with reusable form patterns for creation and edit modes.",
   ],
+  highlights: [
+    "Full CRUD backed by localStorage persistence",
+    "Real-time computed issue status from dates",
+    "Modular Storage.js / Utils.js architecture",
+  ],
   metrics: [
     { label: "Bundle Size", value: "~50KB total (8.3KB Storage.js, 6.1KB Utils.js, 15KB CSS)" },
     { label: "Response Time", value: "Instant (client-side only)" },

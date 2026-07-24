@@ -28,6 +28,11 @@ export const studyAI: Project = {
     "Integrated semantic search at scale: pgvector with HNSW indexing inside Postgres handles embeddings and semantic search directly — no separate vector database — designed for 10M+ vectors.",
     "AI cost and performance optimization: prompt caching (Claude extended cache) for roughly a 70% cost reduction, plus model routing between Haiku and Sonnet to route structured tasks to the far cheaper model.",
   ],
+  highlights: [
+    "~70% AI cost cut via prompt caching",
+    "pgvector semantic search built for 10M+ vectors",
+    "Postgres Row-Level Security enforces tenant isolation",
+  ],
   metrics: [
     { label: "AI Cost Reduction", value: "~70% (prompt caching)" },
     { label: "Model Routing Savings", value: "~12x cheaper on Haiku (~$0.80 / 1k flashcards)" },

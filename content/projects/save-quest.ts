@@ -22,6 +22,11 @@ export const saveQuest: Project = {
     "Financial-grade concurrency and idempotency: deposits use UUID idempotency keys with a unique database constraint to prevent duplicate transactions on retries; XP awards use ON CONFLICT DO NOTHING against a unique (user_id, source_type, source_id) constraint; concurrent streak updates use SELECT FOR UPDATE row locking. Verified in an independent production readiness audit.",
     "Row Level Security with SECURITY DEFINER privilege separation: every table enforces auth.uid() = user_id at the PostgreSQL level. Privileged operations (XP deduction, shield purchase) use SECURITY DEFINER functions with explicit ownership guards, bypassing RLS safely while keeping the hardened update policy intact for direct client access.",
   ],
+  highlights: [
+    "Reduced dashboard latency 87% (14 → 2 queries)",
+    "Idempotent deposits prevent duplicate transactions",
+    "Row-Level Security enforced on every table",
+  ],
   metrics: [
     { label: "Engineering Sprints", value: "20+" },
     { label: "SQL Migrations", value: "40+" },

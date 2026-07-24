@@ -24,6 +24,11 @@ export const advancedEvents: Project = {
     "Bespoke, framework-free CSS design system: custom CSS (29.7% of the repo) with no utility framework, cleanly separating responsive layouts, theming, and component styling.",
     "Role-based access control with session middleware: layered middleware (requireAuth → requireAdmin) enforces authentication and privilege checks on all protected routes, with the password field marked select: false to prevent accidental exposure.",
   ],
+  highlights: [
+    "Atomic MongoDB transactions prevent overbooking",
+    "Framework-free custom CSS design system",
+    "Layered middleware for role-based access control",
+  ],
   metrics: [
     { label: "Sprint Timeline", value: "4 phases (Foundation → Polish)" },
     { label: "Code Organization", value: "4 models · 6 controllers · 7 routes · 15+ views" },
