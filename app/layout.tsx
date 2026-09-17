@@ -4,7 +4,7 @@ import { siteConfig } from "@/config/site";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import { KonamiCode } from "@/components/easter-egg/konami-code";
-import "./globals.css";
+import "../app/globals.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),

@@ -42,7 +42,7 @@ export const saveQuest: Project = {
   links: {
     caseStudy: "/work/save-quest",
     liveDemo: "https://save-quest-rose.vercel.app",
-    // No public GitHub repo linked yet — omitted rather than guessed.
+    github: "https://github.com/FreddyDezmal/SaveQues",
   },
   featured: true,
 };
