@@ -3,6 +3,7 @@ import { Badge } from "@/components/ui/badge";
 import { ButtonLink } from "@/components/ui/button-link";
 import { ProjectMetrics } from "@/components/sections/project-metrics";
 import { getCaseStudyBySlug } from "@/content/case-studies";
+import { InProgressLabel } from "@/components/ui/in-progress-label";
 
 interface ProjectShowcaseProps {
   project: Project;
@@ -49,8 +50,9 @@ export function ProjectShowcase({ project }: ProjectShowcaseProps) {
     >
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)] lg:gap-12">
         <div>
-          <p className="font-mono text-xs uppercase tracking-wide text-text-tertiary">
+          <p className="flex flex-wrap items-center gap-2 font-mono text-xs uppercase tracking-wide text-text-tertiary">
             {project.category}
+            {project.status === "ongoing" && <InProgressLabel />}
           </p>
           <h3
             id={headingId}

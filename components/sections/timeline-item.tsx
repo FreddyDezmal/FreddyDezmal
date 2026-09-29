@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { TimelineMilestone } from "@/types/content";
 import { getCaseStudyBySlug } from "@/content/case-studies";
+import { InProgressLabel } from "@/components/ui/in-progress-label";
 
 interface TimelineItemProps {
   milestone: TimelineMilestone;
@@ -25,9 +26,10 @@ export function TimelineItem({ milestone, isLast }: TimelineItemProps) {
         className="absolute left-0 top-1.5 h-3 w-3 rounded-full border-2 border-accent bg-bg"
       />
 
-      {milestone.date && (
-        <p className="text-xs font-medium uppercase tracking-wide text-text-tertiary">
+      {(milestone.date || milestone.status === "ongoing") && (
+        <p className="flex flex-wrap items-center gap-2 text-xs font-medium uppercase tracking-wide text-text-tertiary">
           {milestone.date}
+          {milestone.status === "ongoing" && <InProgressLabel />}
         </p>
       )}
       <h3 className="mt-1 text-lg font-semibold text-text-primary">

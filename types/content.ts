@@ -30,6 +30,11 @@ export interface Project {
   };
   links: ProjectLinks;
   featured: boolean;
+  /**
+   * "ongoing" marks work still being built — the card shows an
+   * "In progress" label. Omit once the project ships.
+   */
+  status?: "ongoing";
 }
 
 export interface CaseStudySection {
@@ -78,4 +83,6 @@ export interface TimelineMilestone {
   date?: string;
   description: string;
   projectSlug?: string;
+  /** "ongoing" renders an "In progress" label next to the date. */
+  status?: "ongoing";
 }
