@@ -41,11 +41,11 @@ export function Navbar() {
             href="/"
             className="text-sm font-semibold tracking-tight text-text-primary"
           >
-            {getInitials(siteConfig.name)}
+            {siteConfig.shortName}
           </Link>
 
           {/* Desktop links */}
-          <ul className="hidden items-center gap-8 sm:flex">
+          <ul className="hidden items-center gap-6 md:flex lg:gap-8">
             {navConfig.map((item) => {
               const active = pathname === item.href;
               return (
@@ -67,12 +67,12 @@ export function Navbar() {
             })}
           </ul>
 
-          <div className="hidden items-center gap-2 sm:flex">
+          <div className="hidden items-center gap-2 md:flex">
             <ThemeSwitcher />
           </div>
 
           {/* Mobile controls */}
-          <div className="flex items-center gap-1 sm:hidden">
+          <div className="flex items-center gap-1 md:hidden">
             <ThemeSwitcher />
             <button
               type="button"
@@ -80,7 +80,7 @@ export function Navbar() {
               aria-expanded={isOpen}
               aria-controls="mobile-nav"
               aria-label={isOpen ? "Close menu" : "Open menu"}
-              className="inline-flex h-9 w-9 items-center justify-center rounded-md
+              className="inline-flex h-11 w-11 items-center justify-center rounded-md
                          text-text-secondary hover:bg-bg-subtle hover:text-text-primary"
             >
               <MenuIcon isOpen={isOpen} />
@@ -93,7 +93,7 @@ export function Navbar() {
       <div
         id="mobile-nav"
         hidden={!isOpen}
-        className="border-t border-border sm:hidden"
+        className="border-t border-border md:hidden"
       >
         <Container>
           <ul className="flex flex-col gap-1 py-4">
@@ -121,13 +121,6 @@ export function Navbar() {
       </div>
     </header>
   );
-}
-
-function getInitials(name: string) {
-  return name
-    .split(" ")
-    .map((part) => part[0])
-    .join("");
 }
 
 function MenuIcon({ isOpen }: { isOpen: boolean }) {

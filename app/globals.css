@@ -16,7 +16,9 @@
   --color-border: 228 228 231;
   --color-text-primary: 24 24 27;
   --color-text-secondary: 82 82 91;
-  --color-text-tertiary: 161 161 170;
+  /* zinc-500: 4.8:1 on white — the lightest grey that still passes
+     WCAG AA for the small labels, dates and chips that use it. */
+  --color-text-tertiary: 113 113 122;
 
   /* --- Color: single accent, used sparingly --- */
   --color-accent: 37 99 235;       /* actions, links, focus */
@@ -85,7 +87,7 @@
   --color-border: 39 39 42;
   --color-text-primary: 250 250 250;
   --color-text-secondary: 161 161 170;
-  --color-text-tertiary: 113 113 122;
+  --color-text-tertiary: 135 135 145; /* 5.3:1 on bg-subtle — AA */
 
   --color-accent: 96 165 250;
   --color-accent-foreground: 9 9 11;

@@ -17,6 +17,18 @@ interface BuildMetadataArgs {
  * title/description/path — they can't forget a field this way, and there's
  * nowhere for canonical vs. OG url to drift apart.
  */
+/**
+ * Explicit because a page-level `openGraph`/`twitter` object replaces the
+ * parent's wholesale — without this, the generated app/opengraph-image
+ * is silently dropped from every page that calls buildMetadata.
+ */
+const shareImage = {
+  url: "/opengraph-image",
+  width: 1200,
+  height: 630,
+  alt: `${siteConfig.name} — ${siteConfig.role}`,
+};
+
 export function buildMetadata({
   title,
   description,
@@ -41,6 +53,7 @@ export function buildMetadata({
             siteName: siteConfig.name,
             publishedTime,
             tags,
+            images: [shareImage],
           }
         : {
             type: "website",
@@ -48,11 +61,13 @@ export function buildMetadata({
             description,
             url,
             siteName: siteConfig.name,
+            images: [shareImage],
           },
     twitter: {
       card: "summary_large_image",
       title,
       description,
+      images: [shareImage],
     },
   };
 }

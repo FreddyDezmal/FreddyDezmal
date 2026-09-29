@@ -91,7 +91,7 @@ Power BI • Microsoft Excel
 
 **FinTech • Progressive Web Application**
 
-A production-ready fintech platform that transforms personal savings into an engaging experience through gamification. Designed across 18 iterative development sprints with a strong focus on correctness, accessibility, and user trust.
+A production-ready fintech platform that transforms personal savings into an engaging experience through gamification. Designed across 26+ iterative development sprints with a strong focus on correctness, accessibility, and user trust.
 
 **Key Engineering Decisions**
 

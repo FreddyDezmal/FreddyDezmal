@@ -12,7 +12,7 @@ export function ThemeSwitcher() {
       onClick={toggleTheme}
       aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
       aria-pressed={isDark}
-      className="inline-flex h-9 w-9 items-center justify-center rounded-md
+      className="inline-flex h-11 w-11 items-center justify-center rounded-md
                  text-text-secondary transition-colors duration-fast
                  hover:text-text-primary hover:bg-bg-subtle"
     >

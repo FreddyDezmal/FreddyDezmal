@@ -1,11 +1,9 @@
 import { TimelineMilestone } from "@/types/content";
 
 /**
- * Only two milestones carry a date: "Started Studying IT" (given directly)
- * and REP (its repo's actual created/updated dates, already used on its
- * project card). The rest are real, ordered correctly, but left undated —
- * inventing exact months for them would be a fabricated claim, not a
- * design choice.
+ * Dates here must agree with the project cards — REP's comes from the
+ * "Built" metric on its card (Apr 12 – Apr 29, 2026). Where a date isn't
+ * known, leave it off rather than inventing one.
  */
 export const timelineMilestones: TimelineMilestone[] = [
   {
@@ -29,7 +27,7 @@ export const timelineMilestones: TimelineMilestone[] = [
   },
   {
     title: "REP",
-    date: "March 2026",
+    date: "April 2026",
     description:
       "A fitness habit-tracking app built on Supabase, with Row-Level Security handling data isolation entirely at the database layer.",
     projectSlug: "rep",

@@ -28,7 +28,7 @@ export const saveQuest: Project = {
     "Row-Level Security enforced on every table",
   ],
   metrics: [
-    { label: "Engineering Sprints", value: "20+" },
+    { label: "Engineering Sprints", value: "26+" },
     { label: "SQL Migrations", value: "40+" },
     { label: "Dashboard Latency", value: "-87% (14 → 2 queries)" },
     { label: "Signup → Goal", value: "50%" },

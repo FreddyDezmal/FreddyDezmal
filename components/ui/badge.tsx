@@ -17,7 +17,7 @@ export function Badge({ children, className, subtle }: BadgeProps) {
       className={clsx(
         "inline-flex items-center rounded-full border",
         subtle
-          ? "border-border/60 px-2 py-0.5 text-[11px] font-normal text-text-tertiary"
+          ? "border-border px-2 py-0.5 text-xs font-normal text-text-secondary"
           : "border-border px-2.5 py-1 text-xs font-medium text-text-secondary",
         className
       )}

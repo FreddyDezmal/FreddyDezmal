@@ -4,10 +4,21 @@ import { ButtonLink } from "@/components/ui/button-link";
 import { TimelineItem } from "@/components/sections/timeline-item";
 import { timelineMilestones } from "@/content/timeline";
 
-const PREVIEW_COUNT = 4;
+const RECENT_COUNT = 4;
 
+/**
+ * The starting point plus the most recent stretch. Showing only the
+ * latest items hid the growth story — from a first vanilla-JS project to
+ * a multi-tenant AI SaaS in about two years — which is the point of a
+ * timeline on the homepage.
+ */
 export function TimelinePreview() {
-  const recentMilestones = timelineMilestones.slice(-PREVIEW_COUNT);
+  const [firstMilestone] = timelineMilestones;
+  const latest = timelineMilestones.slice(-RECENT_COUNT);
+  const recentMilestones =
+    firstMilestone && !latest.includes(firstMilestone)
+      ? [firstMilestone, ...latest]
+      : latest;
 
   return (
     <section aria-labelledby="timeline-preview-heading" className="py-16 sm:py-24">
