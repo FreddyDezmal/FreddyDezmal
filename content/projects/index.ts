@@ -5,6 +5,7 @@ import { rep } from "./rep";
 import { advancedEvents } from "./advanced-events";
 import { pocketCircle } from "./pocket-circle";
 import { bugTracker } from "./bug-tracker";
+import { eCommerce } from "./e-commerce";
 
 /**
  * Order matches the spec's featured sequence (SaveQuest, StudyAI, REP,
@@ -19,6 +20,7 @@ export const projects: Project[] = [
   advancedEvents,
   pocketCircle,
   bugTracker,
+  eCommerce,
 ];
 
 export function getFeaturedProjects(): Project[] {

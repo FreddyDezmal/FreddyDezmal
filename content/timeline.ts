@@ -54,6 +54,13 @@ export const timelineMilestones: TimelineMilestone[] = [
     projectSlug: "save-quest",
   },
   {
+    title: "SEN371 E-Commerce",
+    date: "August 2026",
+    description:
+      "A four-person team build of an online store on ASP.NET Core, EF Core, PostgreSQL, and React — my first project integrating other people's pull requests, including a mid-project backend migration from Node.js to C#.",
+    projectSlug: "e-commerce",
+  },
+  {
     title: "Today",
     description: "Building the next thing — and still learning in public.",
   },
