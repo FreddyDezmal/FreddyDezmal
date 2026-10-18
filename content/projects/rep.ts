@@ -29,6 +29,7 @@ export const rep: Project = {
   links: {
     caseStudy: "/work/rep",
     github: "https://github.com/FreddyDezmal/workout-tracker",
+    liveDemo: "https://freddydezmal.github.io/workout-tracker/",
   },
   featured: true,
 };

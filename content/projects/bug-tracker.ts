@@ -25,6 +25,7 @@ export const bugTracker: Project = {
   links: {
     caseStudy: "/work/bug-tracker",
     github: "https://github.com/FreddyDezmal/Bug-Tracker-App",
+    liveDemo: "https://freddydezmal.github.io/Bug-Tracker-App/",
   },
   featured: false,
 };
