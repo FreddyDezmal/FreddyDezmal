@@ -40,6 +40,13 @@ export const timelineMilestones: TimelineMilestone[] = [
     projectSlug: "study-ai",
   },
   {
+    title: "Architect Wealth Suite",
+    date: "April 2026",
+    description:
+      "A team-built personal finance platform with an AI advisor. I built the automation and reporting layer: scheduled alert, goal, and exchange-rate jobs, an audit-trail middleware, and PDF/CSV reports.",
+    projectSlug: "architect-wealth-suite",
+  },
+  {
     title: "Pocket Circle",
     date: "May 2026",
     description:
