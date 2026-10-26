@@ -68,6 +68,14 @@ export const timelineMilestones: TimelineMilestone[] = [
     projectSlug: "e-commerce",
   },
   {
+    title: "Greenhaus Storefront",
+    date: "October 2026",
+    description:
+      "Task 4 of my Datheon internship assessment, built solo on ASP.NET Core 10 and React from nine engineering prompts I wrote: server re-priced, idempotent checkout, server-side sessions, and a self-run security audit with its remediation, deployed on Render behind CI that gates every deploy.",
+    projectSlug: "greenhaus",
+    status: "ongoing",
+  },
+  {
     title: "Today",
     description: "Building the next thing — and still learning in public.",
   },

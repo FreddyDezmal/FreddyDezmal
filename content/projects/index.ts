@@ -7,10 +7,12 @@ import { pocketCircle } from "./pocket-circle";
 import { bugTracker } from "./bug-tracker";
 import { eCommerce } from "./e-commerce";
 import { architectWealthSuite } from "./architect-wealth-suite";
+import { greenhaus } from "./greenhaus";
 
 /**
  * Order matches the spec's featured sequence (SaveQuest, StudyAI, REP,
- * Advanced Events) followed by the two non-featured projects. Adding a
+ * Advanced Events), then Greenhaus (featured, after the original four),
+ * followed by the non-featured projects. Adding a
  * new project going forward means: one new file in content/projects/,
  * one import + array entry here — nothing else in the app changes.
  */
@@ -19,6 +21,7 @@ export const projects: Project[] = [
   studyAI,
   rep,
   advancedEvents,
+  greenhaus,
   pocketCircle,
   bugTracker,
   eCommerce,

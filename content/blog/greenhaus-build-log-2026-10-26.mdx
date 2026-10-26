@@ -1,0 +1,26 @@
+---
+title: "Greenhaus build log: from first commit to a CI-gated deploy"
+description: "One week on the Greenhaus storefront: persistence and idempotent checkout, a test suite, a Render deploy, a security audit and its fixes, and CI that decides what reaches production."
+publishedAt: "2026-10-26"
+tags: ["Greenhaus Storefront", "Build log", "ASP.NET Core", "Security"]
+---
+
+{/* DRAFT — written from commit history; edit in your own voice before merging */}
+
+Greenhaus is Task 4 of my Datheon internship assessment, a storefront over FakeStoreAPI: a React + TypeScript frontend and an ASP.NET Core 10 API that re-prices every checkout itself. The repository went from its first commit to a live deploy this week. Each phase started from a prompt I wrote for an AI coding agent, and those prompts are committed in `Documentation/Prompts`.
+
+## What got built
+
+- **Persistence and accounts.** SQLite through EF Core, ASP.NET Core Identity accounts, orders only their owner can read, and checkout made idempotent with an `Idempotency-Key` header, so a retry returns the original order instead of a second one.
+- **Tests.** Unit, component, integration and Playwright browser suites, with coverage reports and a manual test plan.
+- **Deployment.** The API moved to PostgreSQL in a Docker container on Render, with the frontend as a Render Static Site. Data Protection keys are now encrypted with a certificate.
+- **Security.** I ran a security audit of the app (20 findings, four of them medium) and fixed all the medium ones and most of the rest: server-side sessions with single-use refresh tokens, sign-in throttling per account and network instead of lockout, IPv6 rate limits keyed on the /64, security headers, and a least-privilege database role.
+- **CI.** GitHub Actions now builds and tests every push, and Render only deploys commits where every check passed. A separate workflow scans dependencies and the container image weekly.
+
+## One problem worth writing down
+
+The PostgreSQL tests skip themselves when no database is configured, and `dotnet test` still reports success when tests are skipped. In CI that would have meant a green build that never touched PostgreSQL. So CI runs a small script that reads the test results and fails the run if any test was skipped or fewer tests ran than expected.
+
+## What's next
+
+The audit still has open items: email verification and account recovery need an email provider, and backups and data retention still have to be decided.
