@@ -76,6 +76,14 @@ export const timelineMilestones: TimelineMilestone[] = [
     status: "ongoing",
   },
   {
+    title: "CartGuardian",
+    date: "October 2026",
+    description:
+      "A two-person PayPal AI Hackathon 2026 entry with Charity Hlungwani, which I'm building with an AI coding agent I direct: an AI that argues for and against a purchase before checkout, with a PayPal Sandbox checkout locked to the evaluated price. Real AI and Sandbox payments work end to end; persistence and hosting come next.",
+    projectSlug: "cartguardian",
+    status: "ongoing",
+  },
+  {
     title: "Today",
     description: "Building the next thing — and still learning in public.",
   },

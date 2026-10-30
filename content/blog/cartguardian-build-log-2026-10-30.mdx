@@ -1,0 +1,24 @@
+---
+title: "CartGuardian build log: real AI and PayPal Sandbox, end to end"
+description: "The first week on CartGuardian, our PayPal AI Hackathon team entry: an architecture skeleton, then real Gemini output and a real PayPal Sandbox purchase working in the same flow."
+publishedAt: "2026-10-30"
+tags: ["CartGuardian", "Build log", "PayPal", "AI"]
+---
+
+{/* DRAFT — written from commit history; edit in your own voice before merging */}
+
+CartGuardian is the PayPal AI Hackathon 2026 entry I'm building with Charity Hlungwani. Everything so far is my part: I'm building it with an AI coding agent I direct, from a plan committed in `docs/PLAN.md`, and Charity's part comes later. It puts a purchase on trial before you pay. An AI argues the strongest honest case for and against buying, and labels what each point rests on. Then you get a PayPal checkout locked to the exact price that was evaluated.
+
+## What got built
+
+- **The skeleton.** A TypeScript monorepo: React 19 + Vite, an Express 5 API, and a shared Zod package for the API contract. The AI sits behind an adapter, with a labelled rule-based mock so the app runs without any key.
+- **Money stays on the server.** When creating an order, the browser sends only an evaluation ID, and the server reads the amount it stored. A capture only counts once PayPal reports it `COMPLETED` with a matching amount, currency and reference. Retries hit PayPal once.
+- **Real AI and real payments.** On 30 October the whole flow worked on my machine against PayPal Sandbox: a 449.00 USD purchase, approved in the popup and captured on the server. Gemini returned a valid trial in 4.7 s, and it ignored a "guaranteed" instruction I injected into the product text.
+
+## One decision worth writing down
+
+I planned to use Claude, but my Anthropic account had no API credit, so I switched to Gemini's free tier. Its JSON-schema output fit the existing adapter. My first choice of model timed out on every request, even a one-word reply, so the default is now a lighter model, with two fallbacks and a 12-second budget per model. Gemini also ignores `maxLength`, which is why the server re-validates everything with Zod instead of trusting the schema.
+
+## What's next
+
+Persistence moves to Supabase so a capture survives a restart. Then comes the Vercel deploy, then prompt tuning against ten test products, before the 12 November deadline.

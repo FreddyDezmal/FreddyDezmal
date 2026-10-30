@@ -8,6 +8,7 @@ import { bugTracker } from "./bug-tracker";
 import { eCommerce } from "./e-commerce";
 import { architectWealthSuite } from "./architect-wealth-suite";
 import { greenhaus } from "./greenhaus";
+import { cartGuardian } from "./cartguardian";
 
 /**
  * Order matches the spec's featured sequence (SaveQuest, StudyAI, REP,
@@ -26,6 +27,7 @@ export const projects: Project[] = [
   bugTracker,
   eCommerce,
   architectWealthSuite,
+  cartGuardian,
 ];
 
 export function getFeaturedProjects(): Project[] {
