@@ -1,0 +1,26 @@
+---
+title: "Greenhaus build log: backups and a database that expires"
+description: "Locking down the Greenhaus database, taking the first verified backup, and rehearsing the move to a new free-tier database before the current one expires."
+publishedAt: "2026-10-30"
+tags: ["Greenhaus Storefront", "Build log", "PostgreSQL", "Security"]
+---
+
+{/* DRAFT — written from commit history; edit in your own voice before merging */}
+
+Last week's build log ended with backups still undecided. This week I worked on that, plus two items left open from the security audit.
+
+## What got done
+
+- **External access locked down.** Render's default rule let any address try credentials against the database's external URL (`0.0.0.0/0`). It now accepts one `/32` address, mine. The API connects over Render's private network, so it wasn't affected. After the change, `/health/ready` still returned 200.
+- **TLS required.** I added `SSL Mode=Require` to the API's connection string. Now the API refuses to connect rather than fall back to plain text. With that and last week's least-privilege role, audit finding SA-13 is closed.
+- **Manual backups.** Free Render databases have no backups at all, so I documented a `pg_dump` and a restore check. I only count a backup once it has been restored into a throwaway server and the row counts match. The first one restored cleanly.
+
+## The constraint that shaped the plan
+
+I chose to stay on the free plan. That means the database expires 30 days after it was created, and only one free database can exist per workspace. So I can't build the new database next to the old one and switch over: I have to delete the old one first. That makes the backup the only copy of the data, for about 20–30 minutes.
+
+So I rehearsed the whole move locally on 26 October. I restored a dump as a non-superuser, the way Render will, re-ran the role script, and ran the API as the restricted role. The smoke test passed 68 of 68 with no permission errors. The checklist in `Deployment.md` only goes ahead once the restored row counts match the live ones.
+
+## What's next
+
+The real move is due between 16 and 20 November. Retention and deletion of customer data are still open.
