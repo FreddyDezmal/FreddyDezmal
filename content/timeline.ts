@@ -77,11 +77,10 @@ export const timelineMilestones: TimelineMilestone[] = [
   },
   {
     title: "CartGuardian",
-    date: "October 2026",
+    date: "November 2026",
     description:
-      "A two-person PayPal AI Hackathon 2026 entry with Charity Hlungwani, which I'm building with an AI coding agent I direct: an AI that argues for and against a purchase before checkout, with a PayPal Sandbox checkout locked to the evaluated price. Real AI and Sandbox payments work end to end; persistence and hosting come next.",
+      "Submitted our two-person PayPal AI Hackathon 2026 entry with Charity Hlungwani: an AI that argues for and against a purchase before checkout, with product link import and a PayPal Sandbox checkout locked to the evaluated price. Hosted on Vercel with Supabase.",
     projectSlug: "cartguardian",
-    status: "ongoing",
   },
   {
     title: "Today",
